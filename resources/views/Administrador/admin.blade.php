@@ -39,19 +39,14 @@
 <center><p>Mi Perfil</p></center>
 <div class="contenedor">
 <p>Administrador</p>
-Nombre: <input type="text" name="nombre" size="30" maxlength="100" class="nombre" placeholder="++++++++++++++++++++++++++++++++++">--|editar|
-<br>
-Apellidos: <input type="text" name="apellido" size="30" maxlength="100" class="apellidos" placeholder="++++++++++++++++++++++++++++++++++">--|editar|
-<br>
-Email: <input type="text" name="email" size="30" maxlength="100" class="correo" placeholder="+++++++++@+++++++.com">--|editar|
-<br>
-Sede: <input type="text" name="sede" size="30" maxlength="100" class="sede" placeholder="++++++++++++++++++++++++++++++++++">--|editar|
-<br>
-Usuario: <input type="text" name="usuario" size="30" maxlength="100" class="usuario" placeholder="++++++++++++++++++++++++++++++++++">--|editar|
-<br>
-Contraseña: <input type="text" name="contraseña" size="30" maxlength="100" class="contraseña" placeholder="contraseña">--|editar|
-<br>
-<input type="text" name="contraseña" size="30" maxlength="100" placeholder="Confirmar Contraseña" class="contraseña2">
+@foreach($Users as $User)  
+@if( Auth::User()->id == $User->id)    
+<p>{{$User->name}}</p>  
+<p>{{$User->email}}</p>
+<p>{{$User->sede}}</p>
+<p></p> <a class="btnEditar" href="/{{$User->id}}/editarAdmin">editar</a></p>
+@endif
+@endforeach
 </div>
 </div>
 <div class="sec7">

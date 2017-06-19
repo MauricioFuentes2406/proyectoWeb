@@ -68,22 +68,22 @@ Correo: <input class="txtCorreo" id="email" type="email" name="email" value="{{ 
 @if ($errors->has('email'))
  <strong>{{ $errors->first('email') }}</strong>
 @endif
-</div> 
+</div>
 <br>
+
 <div class="fContraseña">
 Contraseña: <input id="password" type="password" class="form-control" name="password" placeholder="Ecribir Contraseña" required>
 @if ($errors->has('password'))
 <strong>{{ $errors->first('password') }}</strong>
 @endif
 </div>
-
 <label class="lblCheck"><input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Recordarme
 </label>
 <br>
-<input class="btn" type="submit" value="Ingresar">
+<input name="ingresar" class="btn" type="submit" value="Ingresar">
 <a class="forgotPass" href="{{ route('password.request') }}">¿Olvidó su contraseña?</a>
-
 </form>
+
 </div>
 </section>
 

@@ -43,7 +43,16 @@
                 </div>
 
             </div>
-            <div class="sec6"></div>
+            <div class="sec6">
+            <p>Administrador</p>
+            @foreach($Users as $User)  
+            @if( Auth::User()->id == $User->id)    
+            <p>{{$User->name}}</p>  
+            <p>{{$User->email}}</p>
+            <p>{{$User->sede}}</p>
+            @endif
+            @endforeach
+            </div>
             <div class="sec7">
             <br>
                 <p class="p1">Fechas importantes</p>

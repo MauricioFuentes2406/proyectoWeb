@@ -44,20 +44,20 @@
             </div>
             <div class="sec6">
 <div class="datos">
-<br> 
-Nombre: ***************************************
-<br>  <br>
-Apellidos: ************************************
-<br>  <br>
-Carné: ************
-<br>  <br>
-Email: *************@********.com
-<br>  <br>
-Carrera: **************
-<br>  <br>
-Sede: ***************
-<br>  <br>
+
+@foreach($Users as $User)  
+@if( Auth::User()->id == $User->id)     
+<p>{{$User->name}}</p>
+<p>{{$User->carnet}}</p>
+<p>{{$User->carrera}}</p>
+<p>{{$User->sede}}</p>
+<p>{{$User->email}}</p>
+@endif
+@endforeach
+
 </div>
+
+
             </div>
             <div class="sec7">
             <br>

@@ -46,17 +46,15 @@
 <center><p>Mi Perfil</p></center>
 <div class="contenedor">
 <p>Docente</p>
-<form action="mailto:chujesus@gmail.com" method="post" enctype="text/plain">
-Nombre: <input type="text" name="nombre" size="30" maxlength="100" class="nombre" placeholder="++++++++++++++++++++++++++++++++++">--|editar|
-<br>
-Apellidos: <input type="text" name="apellido" size="30" maxlength="100" class="apellidos" placeholder="++++++++++++++++++++++++++++++++++">--|editar|
-<br>
-Email: <input type="text" name="email" size="30" maxlength="100" class="correo" placeholder="++++++++++++++@+++++.com">--|editar|
-<br>
-Carrera: <input type="text" name="carrera" size="30" maxlength="100" class="carrera" placeholder="++++++++++++++++++++++++++++++++++">--|editar|
-<br>
-Sede: <input type="text" name="sede" size="30" maxlength="100" class="sede" placeholder="++++++++++++++++++++++++++++++++++">--|editar|
-</form>
+@foreach($Users as $User)  
+@if( Auth::User()->id == $User->id)    
+<p>{{$User->name}}</p>  
+<p>{{$User->carrera}}</p>
+<p>{{$User->sede}}</p>
+<p>{{$User->email}}</p>
+<p></p> <a class="btnEditar" href="/{{$User->id}}/editarProfesor">editar</a></p>
+@endif
+@endforeach
 </div>
 </div>
 <div class="sec7">

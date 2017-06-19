@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+Use App\User;
+use Auth;
+use Illuminate\Routing\Controller;
 use Illuminate\Http\Requests;
 
 class Controlador extends Controller{
@@ -11,40 +14,112 @@ class Controlador extends Controller{
     }
 
     public function index(){
-	return view('loginWeb');
+    if (Auth::user()->tipoUsuario=='1'){
+    return $this->administrador(); 
     }
-    public function HomeEstudiante(){
-    return view('HomeEstudiante');
+    if (Auth::user()->tipoUsuario=='2'){
+    return $this->adminProfesor(); 
+    }
+    if (Auth::user()->tipoUsuario=='3'){
+    return $this->HomeEstudiante(); 
+    }
     }
 
-    public function adminEstudiante(){
-	return view('Estudiante/adminEstudiante');
+    public function HomeEstudiante(){
+    $Users = User::all();
+    return view('/HomeEstudiante', compact('Users'));
     }
-    public function datosAlumno(){
-    return view('Estudiante/datosAlumno');
+    public function adminEstudiante(){
+    $Users = User::all();
+	return view('/Estudiante/adminEstudiante', compact('Users'));
+    }
+
+    public function editarEs($id){
+    $User = User::find($id);
+    return view('/editarEstudiante', compact('User'));
+    }
+    public function update($id){
+
+    $User = User::find($id);
+    $User->name = request('name');
+    $User->carnet = request('carnet');
+    $User->carrera = request('carrera');
+    $User->sede = request('sede');
+    $User->email = request('email');
+    $User->save();
+
+    return redirect('/Estudiante/adminEstudiante');
+    }
+
+    public function datosAlumno($id){
+    $User = User::find($id);
+    return view('/datosAlumno', compact('User'));
     }
 
     public function adminProfesor(){
-	return view('Profesor/adminProfesor');
+    $Users = User::all();
+	return view('/Profesor/adminProfesor', compact('Users'));
     }
+    public function editProfesor($id){
+    $User = User::find($id);
+    return view('/editarProfesor', compact('User'));
+    }
+    public function updateProf($id){
+
+    $User = User::find($id);
+    $User->name = request('name');
+    $User->carrera = request('carrera');
+    $User->sede = request('sede');
+    $User->email = request('email');
+    $User->save();
+
+    return redirect('/Profesor/adminProfesor');
+    }
+
     public function alumnos(){
-    return view('Profesor/alumnos');
+    $Users = User::all();
+    return view('Profesor/alumnos', compact('Users'));
     }
 
     public function administrador(){
-    return view('Administrador/administrador');
+    $Users = User::all();
+    return view('/Administrador/administrador', compact('Users'));
     }
     public function admin(){
-	return view('Administrador/admin'); 
+    $Users = User::all();
+	return view('/Administrador/admin', compact('Users')); 
     }
+    public function editAdministrador($id){
+    $User = User::find($id);
+
+    return view('/editarAdmin', compact('User'));
+    }
+    public function updateAdmin($id){
+
+    $User = User::find($id);
+    $User->name = request('name');
+    $User->sede = request('sede');
+    $User->email = request('email');
+    $User->save();
+
+    return redirect('/Administrador/admin');
+    }
+
     public function adminTeacher(){
-    return view('Administrador/adminTeacher');
+    $Users = User::all();
+    return view('/Administrador/adminTeacher', compact('Users'));
+    }
+    public function store(){
+    $User = User::create(request()->all());
+
+    return redirect('/Administrador/adminTeacher');
     }
 
     public function contactos(){
 	return view('Contacto/contactos');
     }
     public function file(){
-    return view('/Archivos/file');
+    $Users = User::all();
+    return view('/Archivos/file', compact('Users'));
     }
 }

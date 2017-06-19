@@ -5,16 +5,16 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../css/estudiante/css/estiloAdmiStudiant.css">
-        <title>Estudiantes</title>
-        <link rel="stylesheet"  href="../css/font-awesome.css">
-        <link rel="stylesheet"  href="../css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/administrador/css/estiloEditarAdmin.css">
+        <title>Administrador</title>
+        <link rel="stylesheet"  href="/css/font-awesome.css">
+        <link rel="stylesheet"  href="/css/font-awesome.min.css">
     </head>
     <body>
 
         <header class="header">
             <div class="logo">
-                <img src="../img/LogoUnivCostaRica.png" width="230" height="80" alt="Achatada" border="0">
+                <img src="/img/LogoUnivCostaRica.png" width="230" height="80" alt="Achatada" border="0">
             </div>
             <div class="titulo">
                 <h2>UNIVERSIDAD DE COSTA RICA</h2>
@@ -29,40 +29,32 @@
 
         <section class="section-body">
             <div class="sec1">
-                <button onclick="HomeWeb()"><span class="fa fa-home"></span></button>
+                 <button onclick="HomeAdmi()"><span class="fa fa-home"></span></button>
             </div>
             <div class="sec2">
 <center><h4>UCR, Institución benemérita de la educación y la cultura costarricense....</h4></center>
 </div>
 <div class="sec5"></div>
-<div class="sec6">  
-<style type="text/css">
-.btnEditar{
-    text-decoration: none;
-}   
-</style>          
-<center><p>Mi Perfil</p></center>
+<div class="sec6">            
+<center><p>Registrarse</p></center>
 <div class="contenedor">
-<p>Datos del Estudiante</p>
+<p>Llene el formulario:</p>
+<form action="/editarAdmin/{{$User->id}}" method="POST">
+{{csrf_field()}}
+<input type="hidden" name="_method" value="PUT"></input>
+       
+Nombre: <input type="text" name="name" size="30" maxlength="100" class="nombre" value="{{$User->name}}">
+<br>
+Sede: <input type="text" name="sede" size="30" maxlength="100" class="sede" value="{{$User->sede}}">
+<br>
+Email: <input type="text" name="email" size="30" maxlength="100" class="correo" value="{{$User->email}}">
+<br>
+<input type="submit" value="Modificar" id="btn1">
 
-@foreach($Users as $User)  
-@if( Auth::User()->id == $User->id)    
-<p>{{$User->name}}</p>  
-<p>{{$User->carnet}}</p> 
-<p>{{$User->carrera}}</p>
-<p>{{$User->sede}}</p>
-<p>{{$User->email}}</p>
-<p></p> <a class="btnEditar" href="/{{$User->id}}/editarEstudiante">editar</a></p>
-@endif
-@endforeach
-
+</form>
 </div>
 </div>
 <div class="sec7">
-<center><p>Mis Archivos</p></center> 
-Archivo1-----------------<br>
-Archivo2-----------------<br>
-Archivo3----------------- 
 </div>
 </section>
 
@@ -83,6 +75,6 @@ Archivo3-----------------
             </div>
         </footer>
 
-        <script src="../js/estudiante/mainStudiante.js"></script>
+        <script src="/js/administrador/mainAdmin.js"></script>pt>
     </body>
 </html>

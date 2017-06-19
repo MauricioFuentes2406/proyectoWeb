@@ -45,18 +45,24 @@
 <div class="datos">
 <p>Lista de Alumnos</p>
 <br> 
-Nombre: ******************************* Carné: ******.  <a href="/Estudiante/datosAlumno">|ver|</a>
-<br>  
-Nombre: ******************************* Carné: ******.  <a href="/Estudiante/datosAlumno">|ver|</a>
-<br> 
-Nombre: ******************************* Carné: ******.  <a href="/Estudiante/datosAlumno">|ver|</a>
-<br> 
-Nombre: ******************************* Carné: ******.  <a href="/Estudiante/datosAlumno">|ver|</a>
-<br> 
-Nombre: ******************************* Carné: ******.  <a href="/Estudiante/datosAlumno">|ver|</a>
-<br> 
-Nombre: ******************************* Carné: ******.  <a href="/Estudiante/datosAlumno">|ver|</a>
-<br> 
+<style type="text/css">
+    ol{
+        margin:0px 0px; 
+    }
+    .al{
+        margin:0 5px; 
+    }
+    .btnEditar{
+        text-decoration: none;
+    }
+</style>
+@foreach($Users as $User)  
+@if( '3' == $User->tipoUsuario)  
+<ol>   
+<li class="al" type="circle">{{$User->name}} {{$User->carnet}}:<a class="btnEditar" href="/{{$User->id}}/datosAlumno">Ver</a></li>
+</ol>
+@endif
+@endforeach
             </div>
             </div>
             <div class="sec7">

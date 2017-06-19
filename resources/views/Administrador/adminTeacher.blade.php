@@ -38,35 +38,40 @@
 <div class="sec6">            
 <center><p>Agregar docente</p></center>
 <div class="contenedor">
+<form method="post" action="/Users" >
+{{csrf_field()}}
+<input name="tipoUsuario" value="2" style="visibility:hidden"><br>
 <p>Llene el formulario:</p>
-<form action="mailto:chujesus@gmail.com" method="post" enctype="text/plain">
-Nombre: <input type="text" name="nombre" size="30" maxlength="100" class="nombre">
+Nombre: <input type="text" name="name" size="30" maxlength="100" class="nombre" required autofocus>
 <br>
-Apellidos: <input type="text" name="apellido" size="30" maxlength="100" class="apellidos">
+Carrera: <input type="text" name="carrera" size="30" maxlength="100" class="carrera" required autofocus>
 <br>
-Email: <input type="text" name="email" size="30" maxlength="100" value="@" class="correo">
+Sede: <input type="text" name="sede" size="30" maxlength="100" class="sede" required autofocus>
 <br>
-Carrera: <input type="text" name="carrera" size="30" maxlength="100" class="carrera">
+Email: <input id="email" type="email" name="email" size="30" maxlength="100" value="@" class="correo" required autofocus>
 <br>
-Sede: <input type="text" name="sede" size="30" maxlength="100" class="sede">
+Contraseña: <input id="password" type="password" class="contraseña" name="password" size="30" maxlength="100" required>
 <br>
-Usuario: <input type="text" name="usuario" size="30" maxlength="100" class="usuario">
-<br>
-Contraseña: <input type="text" name="contraseña" size="30" maxlength="100" class="contraseña" placeholder="Contraseña">
-<br>
-<input type="text" name="contraseña" size="30" maxlength="100" placeholder="Confirmar Contraseña" class="contraseña2">
+<input id="password-confirm" type="password" class="contraseña2" name="password_confirmation" size="30" maxlength="100" required>
 <br>
 <input type="submit" value="Agregar" id="btn1">
-<input type="Reset" value="Limpiar">
 </form>
 </div>
 </div>
 <div class="sec7">
+<style type="text/css">
+    ol{
+        margin:0px 0px; 
+    }
+</style>
 <p>Lista de Profesores</p><br>
-1 **********<br>
-2 **********<br>
-3 **********<br>
-4 ..............
+@foreach($Users as $User)  
+@if( '2' == $User->tipoUsuario)  
+<ol>   
+<li type="circle">{{$User->name}}</li>
+</ol>
+@endif
+@endforeach
 </div>
 </section>
 

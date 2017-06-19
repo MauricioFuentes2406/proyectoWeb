@@ -5,16 +5,16 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../css/estudiante/css/stiloDatosAlumn.css">
+        <link rel="stylesheet" type="text/css" href="/css/stiloDatosAlumn.css">
         <title>Datos de Alumnos</title>
-        <link rel="stylesheet"  href="../css/font-awesome.css">
-        <link rel="stylesheet"  href="../css/font-awesome.min.css">
+        <link rel="stylesheet"  href="/css/font-awesome.css">
+        <link rel="stylesheet"  href="/css/font-awesome.min.css">
     </head>
     <body>
 
         <header class="header">
             <div class="logo">
-                <img src="../img/LogoUnivCostaRica.png" width="230" height="80" alt="Achatada" border="0">
+                <img src="/img/LogoUnivCostaRica.png" width="230" height="80" alt="Achatada" border="0">
             </div>
             <div class="titulo">
                 <h2>UNIVERSIDAD DE COSTA RICA</h2>
@@ -44,25 +44,22 @@
             <div class="sec6">
 <div class="datos">
 <br> 
-Nombre: ***************************************
+ <form action="/Users/{{$User->id}}" method="POST">    
+<p>{{$User->name}}</p>
+<p>{{$User->carnet}}</p>
+<p>{{$User->carrera}}</p>
+<p>{{$User->sede}}</p>
+<p>{{$User->email}}</p>
+</form>
 <br>  <br>
-Apellidos: ************************************
-<br>  <br>
-Carné: ************
-<br>  <br>
-Carrera: **************
-<br>  <br>
-Teléfono: **************
-<br>  <br>
-<center><p>Archivos del estudiante</p></center> 
+</div>
+</div>
+<div class="sec7">
+<br>
+<p class="p1">Archivos del estudiantes</p>
 Archivo1-----------------<br>
 Archivo2-----------------<br>
 Archivo3----------------- 
-</div>
-            </div>
-            <div class="sec7">
-            <br>
-                <p class="p1">Fechas importantes</p>
             </div>
         </section>
 
@@ -83,6 +80,6 @@ Archivo3-----------------
             </div>
         </footer>
 
-        <script src="../js/estudiante/mainDatosAlumn.js"></script>
+        <script src="/js/estudiante/mainDatosAlumn.js"></script>
     </body>
 </html>

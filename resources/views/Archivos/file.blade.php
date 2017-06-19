@@ -40,16 +40,22 @@
 <div class="contenedor">
 <p>Estudiante</p>
 
-Nombre: *************************************
-<br><br>
-Carrera: ************************************
-<br><br>
-Carné:   ************************************
-<br><br>
+@foreach($Users as $User)  
+@if( Auth::User()->id == $User->id)     
+<p>{{$User->name}}</p>
+<p>{{$User->carnet}}</p>
+<p>{{$User->carrera}}</p>
+@endif
+@endforeach
+
+<br>
 ____________________________________________________
 Añadir Archivo<br><br>
-Seleccionar archivo: __________________  |abrir|<br><br>
+<p><label for="avatar">
+   <input type="file" name="avatar"> 
+</label></p>
 |enviar|
+
 ____________________________________________________
 </div>
 </div>
