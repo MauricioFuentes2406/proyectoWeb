@@ -5,16 +5,16 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../css/archivos/css/estiloFile.css">
+        <link href="{{ asset('/css/archivos/stiloFile.css') }}" rel="stylesheet">
         <title>Adjuntar Archivos</title>
-        <link rel="stylesheet"  href="../css/font-awesome.css">
-        <link rel="stylesheet"  href="../css/font-awesome.min.css">
+        <link rel="stylesheet"  href="/css/font-awesome.css">
+        <link rel="stylesheet"  href="/css/font-awesome.min.css">
     </head>
     <body>
 
         <header class="header">
             <div class="logo">
-                <img src="../img/LogoUnivCostaRica.png" width="230" height="80" alt="Achatada" border="0">
+                <img src="/img/LogoUnivCostaRica.png" width="230" height="80" alt="Achatada" border="0">
             </div>
             <div class="titulo">
                 <h2>UNIVERSIDAD DE COSTA RICA</h2>
@@ -50,20 +50,44 @@
 
 <br>
 ____________________________________________________
-Añadir Archivo<br><br>
-<p><label for="avatar">
-   <input type="file" name="avatar"> 
-</label></p>
-|enviar|
+<form role="form" method="post" action="/archFile" enctype="multipart/form-data">
+{{csrf_field()}}
 
-____________________________________________________
+@foreach($Users as $User)  
+@if( Auth::User()->id == $User->id)  
+<input name="user_id" value="{{$User->id}}" style="visibility:hidden"><br>
+@endif
+@endforeach
+
+<br>Datos<br><br>
+<label for="archivo">Archivos</label>
+<input type="file" name="file"> 
+<br>
+@if($errors->has('file'))
+<span style="color:red;">Debe adjuntar un archivo</span>
+@endif
+<br><br>
+<button class="btn" type="submit" >agregar</button>
+</form>
+__________________________________________________
 </div>
 </div>
 <div class="sec7">
+
 <center><p>Mis Archivos</p></center> 
-Archivo1-----------------|quitar|<br>
-Archivo2-----------------|quitar|<br>
-Archivo3-----------------|quitar| 
+<style type="text/css">
+    ol{
+        margin:0px 0px; 
+    }
+</style>
+@foreach($dbperfils as $dbperfil)  
+@if( Auth::User()->id == $dbperfil->user_id)  
+<ol>   
+<li type="circle">{{$dbperfil->file}}</li>
+</ol>
+@endif
+@endforeach
+
 </div>
 </section>
 
@@ -84,6 +108,6 @@ Archivo3-----------------|quitar|
             </div>
         </footer>
 
-        <script src="../js/archivos/mainfiles.js"></script>
+        <script src="/js/archivos/mainfiles.js"></script>
     </body>
 </html>

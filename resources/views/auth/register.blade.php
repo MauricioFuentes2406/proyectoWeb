@@ -10,19 +10,10 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('tipoUsuario') ? ' has-error' : '' }}">
-
-                            <div class="col-md-6">
-                                <input id="tipoUsuario" value="3" style="visibility:hidden" type="text" class="form-control" name="tipoUsuario" value="{{ old('tipoUsuario') }}" required autofocus>
-
-                                @if ($errors->has('tipoUsuario'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('tipoUsuario') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
+          
+                        <input value="3" style="visibility:hidden" name="tipoUsuario" required autofocus>
+                      
+             
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Nombre</label>
 
@@ -45,7 +36,7 @@
 
                                 @if ($errors->has('carnet'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('carnet') }}</strong>
+                                    Carnet ya está en uso!!!!
                                     </span>
                                 @endif
                             </div>
@@ -87,7 +78,7 @@
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                    Correo ya está en uso!!!!
                                     </span>
                                 @endif
                             </div>
@@ -101,7 +92,7 @@
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                     Contraseñas no coinciden!!!!
                                     </span>
                                 @endif
                             </div>

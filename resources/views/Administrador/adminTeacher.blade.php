@@ -38,10 +38,10 @@
 <div class="sec6">            
 <center><p>Agregar docente</p></center>
 <div class="contenedor">
-<form method="post" action="/Users" >
+
+<form role="form" method="post" action="/Users">
 {{csrf_field()}}
 <input name="tipoUsuario" value="2" style="visibility:hidden"><br>
-<p>Llene el formulario:</p>
 Nombre: <input type="text" name="name" size="30" maxlength="100" class="nombre" required autofocus>
 <br>
 Carrera: <input type="text" name="carrera" size="30" maxlength="100" class="carrera" required autofocus>
@@ -55,13 +55,30 @@ Contraseña: <input id="password" type="password" class="contraseña" name="pass
 <input id="password-confirm" type="password" class="contraseña2" name="password_confirmation" size="30" maxlength="100" required>
 <br>
 <input type="submit" value="Agregar" id="btn1">
+<br>
+<br>
+@if ($errors->has('email'))
+     <span class="help-block">
+     Correo ya está en uso!!!!
+     </span>
+@endif
+<br>
+@if ($errors->has('password'))
+<span class="help-block">
+Contraseñas no coinciden!!!!
+</span>
+@endif
 </form>
+
 </div>
 </div>
 <div class="sec7">
 <style type="text/css">
     ol{
         margin:0px 0px; 
+    }
+    .help-block{
+        color: red;
     }
 </style>
 <p>Lista de Profesores</p><br>

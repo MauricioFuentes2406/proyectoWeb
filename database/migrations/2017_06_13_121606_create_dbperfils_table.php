@@ -15,11 +15,14 @@ class CreateDbperfilsTable extends Migration
     {
         Schema::create('dbperfils', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
-            $table->string('carnet');
-            $table->string('correo');
-            $table->string('carrera');
-            $table->string('sede');
+            
+            $table->string('file');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users')
+            ->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -29,8 +32,7 @@ class CreateDbperfilsTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down(){  
         Schema::dropIfExists('dbperfils');
     }
 }

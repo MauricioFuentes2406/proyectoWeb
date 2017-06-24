@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="/css/estudiante/css/estiloEditiStudiant.css">
+        <link href="{{ asset('/css/estudiante/estiloEditiStudiant.css') }}" rel="stylesheet">
         <title>Estudiantes</title>
         <link rel="stylesheet"  href="/css/font-awesome.css">
         <link rel="stylesheet"  href="/css/font-awesome.min.css">
@@ -40,20 +40,21 @@
 <div class="contenedor">
 <p>Llene el formulario:</p>
 
-<form action="/Users/{{$User->id}}" method="POST">
+<form action="/Users/{{$User->id}}" method="POST" role="form">
 {{csrf_field()}}
 <input type="hidden" name="_method" value="PUT"></input>
        
-Nombre: <input type="text" name="name" size="30" maxlength="100" class="nombre" value="{{$User->name}}">
+Nombre: <input type="text" name="name" size="30" maxlength="100" class="nombre" value="{{$User->name}}" required autofocus>
 <br>
-Carné: <input type="text" name="carnet" size="30" maxlength="100" class="carne" value="{{$User->carnet}}">
+<!--
+Carné: <input type="text" name="carnet" size="30" maxlength="100" class="carne" value="{{$User->carnet}}" required autofocus>
+<br>-->
+Carrera: <input type="text" name="carrera" size="30" maxlength="100" class="carrera" value="{{$User->carrera}}" required autofocus>
 <br>
-Carrera: <input type="text" name="carrera" size="30" maxlength="100" class="carrera" value="{{$User->carrera}}">
+Sede: <input type="text" name="sede" size="30" maxlength="100" class="sede" value="{{$User->sede}}" required autofocus>
 <br>
-Sede: <input type="text" name="sede" size="30" maxlength="100" class="sede" value="{{$User->sede}}">
-<br>
-Email: <input type="text" name="email" size="30" maxlength="100" class="correo" value="{{$User->email}}">
-<br>
+<!--Email: <input type="text" name="email" size="30" maxlength="100" class="correo" value="{{$User->email}}" required autofocus>
+<br>-->
 <input type="submit" value="Modificar" id="btn1">
 
 </form>
@@ -81,6 +82,6 @@ Email: <input type="text" name="email" size="30" maxlength="100" class="correo" 
             </div>
         </footer>
 
-        <script src="../js/estudiante/mainStudiante.js"></script>
+        <script src="/js/estudiante/mainStudiante.js"></script>
     </body>
 </html>

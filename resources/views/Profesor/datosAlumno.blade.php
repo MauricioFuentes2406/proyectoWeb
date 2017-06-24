@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="/css/stiloDatosAlumn.css">
+        <link href="{{ asset('/css/adminProfesor/estiloDatosAlumn.css') }}" rel="stylesheet">
         <title>Datos de Alumnos</title>
         <link rel="stylesheet"  href="/css/font-awesome.css">
         <link rel="stylesheet"  href="/css/font-awesome.min.css">
@@ -51,19 +51,44 @@
 <p>{{$User->sede}}</p>
 <p>{{$User->email}}</p>
 </form>
-<br>  <br>
+<br><br>
 </div>
 </div>
 <div class="sec7">
 <br>
 <p class="p1">Archivos del estudiantes</p>
-Archivo1-----------------<br>
-Archivo2-----------------<br>
-Archivo3----------------- 
-            </div>
-        </section>
+<style type="text/css">
+    ol{
+        margin:0px 0px; 
+    }
+    li{
+       margin:10px 0px;  
+    }
+    .btnEditar{
+        text-decoration: none;
+    }
+    .verDatos{
+        overflow: auto; 
+        height: 397px;  
+    }   
+</style>
+<br>
+<div class="verDatos">
+@foreach($dbperfils as $dbperfil)
 
-        <footer class="footer">
+@if( $dbperfil->user_id == $User->id )
+<ol> 
+<li type="circle">{{$dbperfil->file}} <a class="btnEditar" href="/storage/{{$dbperfil->file}}">Ver</a> </li>
+</ol>
+@endif
+
+@endforeach 
+</div>
+</div>
+ 
+ </section>
+
+ <footer class="footer">
             <div class="social">
                 <a href="a" class="item"> <span class="fa fa-facebook"></span></a>
                 <a href="a" class="item"> <span class="fa fa-twitter"></span></a>
@@ -78,7 +103,7 @@ Archivo3-----------------
                     </ul>
                 </nav>
             </div>
-        </footer>
+</footer>
 
         <script src="/js/estudiante/mainDatosAlumn.js"></script>
     </body>

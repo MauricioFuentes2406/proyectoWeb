@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Http\Requests;
+
 Use App\User;
+Use App\dbperfil;
 use Auth;
-use Illuminate\Routing\Controller;
-use Illuminate\Http\Requests;
+use Storage;
+use App\Image;
+
+
 
 class Controlador extends Controller{
 
@@ -18,7 +24,7 @@ class Controlador extends Controller{
     return $this->administrador(); 
     }
     if (Auth::user()->tipoUsuario=='2'){
-    return $this->adminProfesor(); 
+    return $this->alumnos(); 
     }
     if (Auth::user()->tipoUsuario=='3'){
     return $this->HomeEstudiante(); 
@@ -36,16 +42,16 @@ class Controlador extends Controller{
 
     public function editarEs($id){
     $User = User::find($id);
-    return view('/editarEstudiante', compact('User'));
+    return view('/Estudiante/editarEstudiante', compact('User'));
     }
     public function update($id){
 
     $User = User::find($id);
     $User->name = request('name');
-    $User->carnet = request('carnet');
+    //$User->carnet = request('carnet');
     $User->carrera = request('carrera');
     $User->sede = request('sede');
-    $User->email = request('email');
+    //$User->email = request('email');
     $User->save();
 
     return redirect('/Estudiante/adminEstudiante');
@@ -53,7 +59,9 @@ class Controlador extends Controller{
 
     public function datosAlumno($id){
     $User = User::find($id);
-    return view('/datosAlumno', compact('User'));
+    $Users = User::all();
+    $dbperfils = dbperfil::all();
+    return view('/Profesor/datosAlumno', compact('User','dbperfils','Users'));
     }
 
     public function adminProfesor(){
@@ -62,7 +70,7 @@ class Controlador extends Controller{
     }
     public function editProfesor($id){
     $User = User::find($id);
-    return view('/editarProfesor', compact('User'));
+    return view('/Profesor/editarProfesor', compact('User'));
     }
     public function updateProf($id){
 
@@ -70,7 +78,7 @@ class Controlador extends Controller{
     $User->name = request('name');
     $User->carrera = request('carrera');
     $User->sede = request('sede');
-    $User->email = request('email');
+    //$User->email = request('email');
     $User->save();
 
     return redirect('/Profesor/adminProfesor');
@@ -92,7 +100,7 @@ class Controlador extends Controller{
     public function editAdministrador($id){
     $User = User::find($id);
 
-    return view('/editarAdmin', compact('User'));
+    return view('/Administrador/editarAdmin', compact('User'));
     }
     public function updateAdmin($id){
 
@@ -109,10 +117,26 @@ class Controlador extends Controller{
     $Users = User::all();
     return view('/Administrador/adminTeacher', compact('Users'));
     }
-    public function store(){
-    $User = User::create(request()->all());
 
-    return redirect('/Administrador/adminTeacher');
+    public function store(Request $request){
+
+        $this->validate($request,[
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed'
+        ]);
+
+    $User = new User();
+    
+    $User->name = $request->name;
+    $User->carrera = $request->carrera;
+    $User->sede = $request->sede;
+    $User->tipoUsuario = $request->tipoUsuario;
+    $User->email = $request->email;
+    $User->password = bcrypt($request->password);
+
+    $User->save();
+
+    return back();
     }
 
     public function contactos(){
@@ -120,6 +144,32 @@ class Controlador extends Controller{
     }
     public function file(){
     $Users = User::all();
-    return view('/Archivos/file', compact('Users'));
+    $dbperfils = dbperfil::all();
+    return view('/Archivos/file', compact('Users','dbperfils'));
     }
+
+    public function save(Request $request){
+
+    $this->validate($request,[
+           'file' => 'required'
+        ]);
+
+    $dbperfil = new dbperfil();
+    
+    $dbperfil->user_id = $request->user_id;
+    $img = $request->file('file');
+    $ruta = time().'_'.$img->getClientOriginalName();
+    
+    Storage::disk('archivos')->put($ruta, file_get_contents($img->getRealPath() ) );
+    $dbperfil->file = $ruta;
+    $dbperfil->save();
+
+    return back();
+    }
+
+    public function descargar($archivo){
+     
+       return app_path().$archivo; 
+    }
+
 }

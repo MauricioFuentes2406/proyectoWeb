@@ -5,16 +5,16 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../css/estudiante/css/estiloAdmiStudiant.css">
+        <link href="{{ asset('/css/estudiante/estiloAdmiStudiant.css') }}" rel="stylesheet">
         <title>Estudiantes</title>
-        <link rel="stylesheet"  href="../css/font-awesome.css">
-        <link rel="stylesheet"  href="../css/font-awesome.min.css">
+        <link rel="stylesheet"  href="/css/font-awesome.css">
+        <link rel="stylesheet"  href="/css/font-awesome.min.css">
     </head>
     <body>
 
         <header class="header">
             <div class="logo">
-                <img src="../img/LogoUnivCostaRica.png" width="230" height="80" alt="Achatada" border="0">
+                <img src="/img/LogoUnivCostaRica.png" width="230" height="80" alt="Achatada" border="0">
             </div>
             <div class="titulo">
                 <h2>UNIVERSIDAD DE COSTA RICA</h2>
@@ -59,10 +59,7 @@
 </div>
 </div>
 <div class="sec7">
-<center><p>Mis Archivos</p></center> 
-Archivo1-----------------<br>
-Archivo2-----------------<br>
-Archivo3----------------- 
+
 </div>
 </section>
 
@@ -83,6 +80,6 @@ Archivo3-----------------
             </div>
         </footer>
 
-        <script src="../js/estudiante/mainStudiante.js"></script>
+        <script src="/js/estudiante/mainStudiante.js"></script>
     </body>
 </html>

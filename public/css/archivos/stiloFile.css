@@ -84,6 +84,14 @@ padding-left: 100px;
 .correo,.carne{
 	margin-left: 14px;
 }
+.btn{
+	border: 1px solid gray;
+	width: 80px;
+	height: 20px;
+	font-size: 1em;
+	color: black;
+	border-radius: 4px;
+}
 /*********************************PIE******************************/
 .footer{
 display: flex;

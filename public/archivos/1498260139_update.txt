@@ -1,0 +1,10 @@
+Entre en Inicio, Ejecutar (Windows+R), escribe “services.msc” 
+para entrar en la ventana de aplicación de 
+servicios.
+En la lista de procesos, elige Windows Update y haz click 
+sobre él.
+Para deshabilitarlo, entra en la pestaña General / Tipo de 
+inicio y selecciona “Deshabilitado”.
+Aceptar los cambios y reinicia para evitar las 
+actualizaciones automáticas de Windows 10.
+

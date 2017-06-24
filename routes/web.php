@@ -11,6 +11,8 @@
 |
 */
 Auth::routes();
+/*Route::resource('/dberfil', 'Controlador');
+*/
 Route::get('/', 'Controlador@index')->name('home');
 
 Route::get('/HomeEstudiante', 'Controlador@HomeEstudiante');
@@ -34,5 +36,6 @@ Route::put('/editarAdmin/{id}', 'Controlador@updateAdmin');
 
 Route::get('/Contacto/contactos', 'Controlador@contactos'); 
 Route::get('/Archivos/file', 'Controlador@file');
+Route::post('/archFile', 'Controlador@save');
 
-
+Route::get('/storage/{archivo}','Controlador@descargar'); 

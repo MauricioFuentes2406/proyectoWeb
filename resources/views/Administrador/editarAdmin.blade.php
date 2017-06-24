@@ -5,8 +5,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="/css/adminProfesor/css/stiloEditProf.css">
-        <title>Profesor</title>
+        <link href="{{ asset('/css/administrador/estiloEditarAdmin.css') }}" rel="stylesheet">
+        <title>Administrador</title>
         <link rel="stylesheet"  href="/css/font-awesome.css">
         <link rel="stylesheet"  href="/css/font-awesome.min.css">
     </head>
@@ -29,7 +29,7 @@
 
         <section class="section-body">
             <div class="sec1">
-                <button onclick="HomeProfe()"><span class="fa fa-home"></span></button>
+                 <button onclick="HomeAdmi()"><span class="fa fa-home"></span></button>
             </div>
             <div class="sec2">
 <center><h4>UCR, Institución benemérita de la educación y la cultura costarricense....</h4></center>
@@ -39,17 +39,15 @@
 <center><p>Registrarse</p></center>
 <div class="contenedor">
 <p>Llene el formulario:</p>
-<form action="/editProf/{{$User->id}}" method="POST">
+<form action="/editarAdmin/{{$User->id}}" method="POST" role="form">
 {{csrf_field()}}
 <input type="hidden" name="_method" value="PUT"></input>
        
-Nombre: <input type="text" name="name" size="30" maxlength="100" class="nombre" value="{{$User->name}}">
+Nombre: <input type="text" name="name" size="30" maxlength="100" class="nombre" value="{{$User->name}}" required autofocus>
 <br>
-Carrera: <input type="text" name="carrera" size="30" maxlength="100" class="carrera" value="{{$User->carrera}}">
+Sede: <input type="text" name="sede" size="30" maxlength="100" class="sede" value="{{$User->sede}}" required autofocus>
 <br>
-Sede: <input type="text" name="sede" size="30" maxlength="100" class="sede" value="{{$User->sede}}">
-<br>
-Email: <input type="text" name="email" size="30" maxlength="100" class="correo" value="{{$User->email}}">
+Email: <input type="text" name="email" size="30" maxlength="100" class="correo" value="{{$User->email}}" required autofocus>
 <br>
 <input type="submit" value="Modificar" id="btn1">
 
@@ -77,6 +75,6 @@ Email: <input type="text" name="email" size="30" maxlength="100" class="correo" 
             </div>
         </footer>
 
-        <script src="../js/adminProfesor/mainProfe.js"></script>
+        <script src="/js/administrador/mainAdmin.js"></script>pt>
     </body>
 </html>

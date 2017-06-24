@@ -57,31 +57,37 @@ Salir
 <div class="sec2">
 <center><h4>UCR, Institución benemérita de la educación y la cultura costarricense...</h4></center>
 </div>
-
+<style type="text/css">
+    .help-block{
+        color: red;
+    }
+</style>
 <div class="contenedor-form">
-<form method="POST" action="{{ route('login') }}">
+<form method="POST" action="{{ route('login') }}" role="form">
 <center><h2 class="mweb">Ingreso al sistema de maestría web</h2></center>
 {{ csrf_field() }}
-
 <div class="fCarne">  
 Correo: <input class="txtCorreo" id="email" type="email" name="email" value="{{ old('email') }}" placeholder="Ecribir correo" required autofocus>
-@if ($errors->has('email'))
- <strong>{{ $errors->first('email') }}</strong>
-@endif
 </div>
 <br>
-
 <div class="fContraseña">
-Contraseña: <input id="password" type="password" class="form-control" name="password" placeholder="Ecribir Contraseña" required>
-@if ($errors->has('password'))
-<strong>{{ $errors->first('password') }}</strong>
-@endif
+Contraseña: <input id="password" type="password" class="form-control" name="password" placeholder="Ecribir Contraseña" required> 
 </div>
 <label class="lblCheck"><input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Recordarme
 </label>
 <br>
 <input name="ingresar" class="btn" type="submit" value="Ingresar">
 <a class="forgotPass" href="{{ route('password.request') }}">¿Olvidó su contraseña?</a>
+@if ($errors->has('email'))
+     <span class="help-block">
+     Usuario no se encuentra registrado o la contraseña no es valida!!!!
+     </span>
+@endif
+@if ($errors->has('password'))
+     <span class="help-block">
+     Contraseña incorrecta!!!!
+     </span>
+@endif
 </form>
 
 </div>
