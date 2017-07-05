@@ -15,8 +15,8 @@ class CreateDbperfilsTable extends Migration
     {
         Schema::create('dbperfils', function (Blueprint $table) {
             $table->increments('id');
-            
             $table->string('file');
+            $table->integer('estado');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
             ->references('id')

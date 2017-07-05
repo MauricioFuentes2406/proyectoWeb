@@ -11,7 +11,7 @@
                         {{ csrf_field() }}
 
           
-                        <input value="3" style="visibility:hidden" name="tipoUsuario" required autofocus>
+                        <input value="3" style="visibility:hidden" name="tipoUsuario">
                       
              
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -78,7 +78,7 @@
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
-                                    Correo ya está en uso!!!!
+                                    Correo ya está en uso o está incorrecto!!!!
                                     </span>
                                 @endif
                             </div>
@@ -92,7 +92,7 @@
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
-                                     Contraseñas no coinciden!!!!
+                                     Contraseñas no coinciden o incorrecta(min 6 carácteres)!!!!
                                     </span>
                                 @endif
                             </div>

@@ -1,80 +1,57 @@
+@extends('/masterbody/sitemaster')
+@section('cont')
+    @if( Auth::User()->tipoUsuario==2 or Auth::User()->tipoUsuario==3)  
+     <script type="text/javascript">
+         setTimeout("window.history.go(-1)",0); 
+     </script>
+    @endif
 
+<div class="container-fluid"> 
+<div class="row">
 
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="{{ asset('/css/administrador/estiloEditarAdmin.css') }}" rel="stylesheet">
-        <title>Administrador</title>
-        <link rel="stylesheet"  href="/css/font-awesome.css">
-        <link rel="stylesheet"  href="/css/font-awesome.min.css">
-    </head>
-    <body>
-
-        <header class="header">
-            <div class="logo">
-                <img src="/img/LogoUnivCostaRica.png" width="230" height="80" alt="Achatada" border="0">
-            </div>
-            <div class="titulo">
-                <h2>UNIVERSIDAD DE COSTA RICA</h2>
-                <p class="p1">Maestría de la Carrera Informática Empresarial</p>
-            </div>
-            <div class="fotolog">
-            @extends('homeLogout')
-            @section('contenido')
-            @endsection
-            </div>
-        </header>
-
-        <section class="section-body">
-            <div class="sec1">
-                 <button onclick="HomeAdmi()"><span class="fa fa-home"></span></button>
-            </div>
-            <div class="sec2">
-<center><h4>UCR, Institución benemérita de la educación y la cultura costarricense....</h4></center>
+<div class="col-xs-12 col-sm-3 col-md-3">
+<div class="form-group">
+<input value="1" style="visibility:hidden" id="id"></div>    
 </div>
-<div class="sec5"></div>
-<div class="sec6">            
-<center><p>Registrarse</p></center>
-<div class="contenedor">
-<p>Llene el formulario:</p>
+
+<div class="col-xs-12 col-sm-6 col-md-6">
+<div class="con">
+
+<h2 style="color:gray; text-align: left;">Editar formulario:</h2>
 <form action="/editarAdmin/{{$User->id}}" method="POST" role="form">
 {{csrf_field()}}
-<input type="hidden" name="_method" value="PUT"></input>
-       
-Nombre: <input type="text" name="name" size="30" maxlength="100" class="nombre" value="{{$User->name}}" required autofocus>
-<br>
-Sede: <input type="text" name="sede" size="30" maxlength="100" class="sede" value="{{$User->sede}}" required autofocus>
-<br>
-Email: <input type="text" name="email" size="30" maxlength="100" class="correo" value="{{$User->email}}" required autofocus>
-<br>
-<input type="submit" value="Modificar" id="btn1">
+<input type="hidden" name="_method" value="PUT"></input>  
+<div class="form-group">
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="name" class="form-control" value="{{$User->name}}" required autofocus>  
+</div> 
+<div class="form-group">
+    <label for="sede">Sede:</label>
+    <input type="text" name="sede" class="form-control" value="{{$User->sede}}" required autofocus>
+</div> 
+<div class="form-group">
+    <label for="sede">Email:</label>
+    <input type="text" name="email" class="form-control" value="{{$User->email}}" required autofocus> 
+</div>
 
+<input class="btn btn-primary" type="submit" value="Modificar">
+<br><br>   
+<div class="form-group">
+@if ($errors->has('email'))
+    <span class="text-danger">
+    Correo ya está en uso o está incorrecto!!!
+    </span>
+@endif
+</div>
 </form>
-</div>
-</div>
-<div class="sec7">
-</div>
-</section>
 
-        <footer class="footer">
-            <div class="social">
-                <a href="a" class="item"> <span class="fa fa-facebook"></span></a>
-                <a href="a" class="item"> <span class="fa fa-twitter"></span></a>
-                <a href="a" class="item"> <span class="fa fa-instagram"></span></a>
-            </div>
-            <div class="content-links">
-                <nav class="menu">
-                    <ul>
-                        <li><a href="#">UCR</a></li>
-                        <li><a href="#">becas-ucr</a></li>
-                        <li><a href="#">e-matrícula</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </footer>
+</div>
+</div>
 
-        <script src="/js/administrador/mainAdmin.js"></script>pt>
-    </body>
-</html>
+<div class="col-xs-12 col-sm-3 col-md-3">
+</div>
+
+</div>
+</div>
+
+@endsection

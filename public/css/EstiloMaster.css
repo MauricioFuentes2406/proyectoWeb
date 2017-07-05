@@ -1,0 +1,93 @@
+/*********************************ENCABEZADO******************************/
+header{
+margin: 20px 0px;
+height: 100px;
+}
+/*********************************BODY******************************/
+.contDir{
+ 	display: none;
+}
+.contxs{
+    display: block;
+ }
+@media screen and (min-width: 768px) {
+ 
+ .contDir{
+ 	display: block;
+ }
+
+ .contxs{
+   display: none;
+ }
+	
+}
+
+
+h2{
+	color: #2185C4;
+	margin: 10px 0px;
+	text-align: center;
+}
+h4{
+	color: white;
+}
+h4{
+	font-style: italic;
+    text-align: center;
+}
+p{
+	font-size: 1.5em;
+}
+.p1{
+	color: gray;
+	margin: 0px 0px;
+	text-align: center;
+}
+.art{
+	border: 2px solid gray;
+	height: 55px;
+	background-color: #2185C4;
+}
+.contenedor-form{
+height: 451px;
+}
+.contenido{
+	padding: 20px;
+}
+.home{
+	font-size: 34px;
+}
+.treeview a{
+text-decoration: none;	
+color: #2185C4;
+}
+.treeviewdiv{
+padding-top: 40px;
+}
+.treeviewdiv ul{
+color: gray;
+}
+.con{
+	margin: 40px 0px;
+}
+.over{
+	height: 450px;
+	overflow: auto;
+}
+
+/*********************************PIE******************************/
+.footer{
+border-top: 2px solid gray;
+
+}
+.social, .item{
+	font-size: 20px;
+	text-decoration: none;
+	color: #222;
+}
+.menu a{
+	color: gray;
+	text-decoration: none;
+    font-size: 20px;
+}
+

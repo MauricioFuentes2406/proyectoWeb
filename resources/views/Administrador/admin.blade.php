@@ -1,75 +1,45 @@
+@extends('/masterbody/sitemaster')
+@section('cont')
+    @if( Auth::User()->tipoUsuario==2 or Auth::User()->tipoUsuario==3)  
+     <script type="text/javascript">
+         setTimeout("window.history.go(-1)",0); 
+     </script>
+    @endif
 
+<div class="container-fluid"> 
+<div class="row">
 
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../css/administrador/css/estiloAdmin.css">
-        <title>Administrador</title>
-        <link rel="stylesheet"  href="../css/font-awesome.css">
-        <link rel="stylesheet"  href="../css/font-awesome.min.css">
-    </head>
-    <body>
-
-        <header class="header">
-            <div class="logo">
-                <img src="../img/LogoUnivCostaRica.png" width="230" height="80" alt="Achatada" border="0">
-            </div>
-            <div class="titulo">
-                <h2>UNIVERSIDAD DE COSTA RICA</h2>
-                <p class="p1">Maestría de la Carrera Informática Empresarial</p>
-            </div>
-            <div class="fotolog">
-            @extends('homeLogout')
-            @section('contenido')
-            @endsection
-            </div>
-        </header>
-
-        <section class="section-body">
-            <div class="sec1">
-                <button onclick="HomeAdmi()"><span class="fa fa-home"></span></button>
-            </div>
-            <div class="sec2">
-<center><h4>UCR, Institución benemérita de la educación y la cultura costarricense....</h4></center>
+<div class="col-xs-12 col-sm-3 col-md-3">
+<div class="form-group">
+  <input value="1" style="visibility:hidden" id="id">
+</div>    
 </div>
-<div class="sec5"></div>
-<div class="sec6">            
-<center><p>Mi Perfil</p></center>
-<div class="contenedor">
-<p>Administrador</p>
+
+<div class="col-xs-12 col-sm-6 col-md-6">
+<h2 style="color:gray; text-align: left;">Administrador</h2>
+<div class="con">
 @foreach($Users as $User)  
 @if( Auth::User()->id == $User->id)    
-<p>{{$User->name}}</p>  
-<p>{{$User->email}}</p>
-<p>{{$User->sede}}</p>
-<p></p> <a class="btnEditar" href="/{{$User->id}}/editarAdmin">editar</a></p>
+<p class="text-info">Nombre: <strong>{{$User->name}}</strong></p>
+<p class="text-info">Sede: <strong>{{$User->sede}}</strong></p>
+<p class="text-info">Email: <strong>{{$User->email}}</strong></p>
+<p> <a class="btn btn-info" href="/{{$User->id}}/editarAdmin">editar</a></p>
+<p> <a class="btn btn-warning" href="/{{$User->id}}/cambiarPassword">cambiar contraseña</a></p>
 @endif
 @endforeach
+@if($flash=session('message'))
+      <div class="alert alert-success">
+      <button class="close" data-dismiss="alert"><span>&times;</span></button>
+      <strong>{{$flash}}</strong> 
+      </div>
+@endif
 </div>
 </div>
-<div class="sec7">
-</div>
-</section>
 
-        <footer class="footer">
-            <div class="social">
-                <a href="a" class="item"> <span class="fa fa-facebook"></span></a>
-                <a href="a" class="item"> <span class="fa fa-twitter"></span></a>
-                <a href="a" class="item"> <span class="fa fa-instagram"></span></a>
-            </div>
-            <div class="content-links">
-                <nav class="menu">
-                    <ul>
-                        <li><a href="#">UCR</a></li>
-                        <li><a href="#">becas-ucr</a></li>
-                        <li><a href="#">e-matrícula</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </footer>
+<div class="col-xs-12 col-sm-3 col-md-3">
+</div>
 
-        <script src="../js/administrador/mainAdmin.js"></script>
-    </body>
-</html>
+</div>
+</div>
+
+@endsection

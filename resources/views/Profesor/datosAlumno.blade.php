@@ -1,110 +1,55 @@
-
-
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="{{ asset('/css/adminProfesor/estiloDatosAlumn.css') }}" rel="stylesheet">
-        <title>Datos de Alumnos</title>
-        <link rel="stylesheet"  href="/css/font-awesome.css">
-        <link rel="stylesheet"  href="/css/font-awesome.min.css">
-    </head>
-    <body>
-
-        <header class="header">
-            <div class="logo">
-                <img src="/img/LogoUnivCostaRica.png" width="230" height="80" alt="Achatada" border="0">
-            </div>
-            <div class="titulo">
-                <h2>UNIVERSIDAD DE COSTA RICA</h2>
-                <p class="p1">Maestría de la Carrera Informática Empresarial</p>
-            </div>
-            <div class="fotolog">
-            @extends('homeLogout')
-            @section('contenido')
-            @endsection
-            </div>
-        </header>
-
-        <section class="section-body">
-            <div class="sec1">
-                <button onclick="HomeProfe()"><span class="fa fa-home"></span></button>
-            </div>
-            <div class="sec2">
-                <center><h4>UCR, Institución benemérita de la educación y la cultura costarricense....</h4></center>
-            </div>
-            <div class="sec5">
-                <div class="treeviewdiv">
-                    <ul class="treeview">
-                         <li><a href="/Profesor/alumnos">Alumnos</a>
-                    </ul>
-                </div>
-            </div>
-            <div class="sec6">
-<div class="datos">
-<br> 
- <form action="/Users/{{$User->id}}" method="POST">    
-<p>{{$User->name}}</p>
-<p>{{$User->carnet}}</p>
-<p>{{$User->carrera}}</p>
-<p>{{$User->sede}}</p>
-<p>{{$User->email}}</p>
-</form>
-<br><br>
-</div>
-</div>
-<div class="sec7">
-<br>
-<p class="p1">Archivos del estudiantes</p>
-<style type="text/css">
-    ol{
-        margin:0px 0px; 
-    }
-    li{
-       margin:10px 0px;  
-    }
-    .btnEditar{
-        text-decoration: none;
-    }
-    .verDatos{
-        overflow: auto; 
-        height: 397px;  
-    }   
-</style>
-<br>
-<div class="verDatos">
-@foreach($dbperfils as $dbperfil)
-
-@if( $dbperfil->user_id == $User->id )
-<ol> 
-<li type="circle">{{$dbperfil->file}} <a class="btnEditar" href="/storage/{{$dbperfil->file}}">Ver</a> </li>
-</ol>
+@extends('/masterbody/sitemaster')
+@section('cont')
+@if( Auth::User()->tipoUsuario==1 or Auth::User()->tipoUsuario==3)  
+     <script type="text/javascript">
+         setTimeout("window.history.go(-1)",0); 
+     </script>
 @endif
 
+<div class="container-fluid"> 
+<div class="row">
+
+<div class="col-xs-12 col-sm-2 col-md-3">
+<div class="form-group">
+  <div class="treeviewdiv">
+    <ul class="treeview">
+        <li><a href="/Profesor/alumnos">Alumnos</a>
+    </ul>
+  </div> 
+</div>    
+</div>
+
+<div class="col-xs-12 col-sm-6 col-md-5">
+<h2 style="color:gray; text-align: left;">Datos del Estudiante</h2>
+<div class="con">
+ <form action="/Users/{{$User->id}}" method="POST">    
+<p class="text-info">Nombre: <strong>{{$User->name}}</strong></p>
+<p class="text-info">Carné: <strong>{{$User->carnet}}</strong></p>
+<p class="text-info">Carrera: <strong>{{$User->carrera}}</strong></p>
+<p class="text-info">Sede: <strong>{{$User->sede}}</strong></p>
+<p class="text-info">Email: <strong>{{$User->email}}</strong></p>
+</form>
+</div>
+</div>
+
+<div class="col-xs-12 col-sm-4 col-md-4">
+<h2 style="color:gray; text-align: center;">Archivos del estudiantes</h2>
+
+<div class="over">
+
+@foreach($dbperfils as $dbperfil)
+@if( $dbperfil->user_id == $User->id and $dbperfil->estado == 1)
+<ol> 
+<li type="circle"> <a class="btn-xs btn-primary glyphicon glyphicon-download-alt" style="text-decoration: none;" href="/archivos/{{$dbperfil->file}}" target="_blank"> {{$dbperfil->file}}</a> </li>
+</ol>
+@endif
+<!--<a href="/archivos/{{$dbperfil->file}}" download="{{$dbperfil->file}}" target="_blank">{{$dbperfil->file}}</a>-->
 @endforeach 
+</div>  
+</div>
+<input value="2" style="visibility:hidden" id="id"> 
 </div>
 </div>
- 
- </section>
 
- <footer class="footer">
-            <div class="social">
-                <a href="a" class="item"> <span class="fa fa-facebook"></span></a>
-                <a href="a" class="item"> <span class="fa fa-twitter"></span></a>
-                <a href="a" class="item"> <span class="fa fa-instagram"></span></a>
-            </div>
-            <div class="content-links">
-                <nav class="menu">
-                    <ul>
-                        <li><a href="http://www.ucr.ac.cr/">UCR</a></li>
-                        <li><a href="https://becas.ucr.ac.cr/">becas-ucr</a></li>
-                        <li><a href="https://ematricula.ucr.ac.cr/">e-matrícula</a></li>
-                    </ul>
-                </nav>
-            </div>
-</footer>
+@endsection
 
-        <script src="/js/estudiante/mainDatosAlumn.js"></script>
-    </body>
-</html>

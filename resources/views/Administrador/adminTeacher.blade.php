@@ -1,114 +1,93 @@
+@extends('/masterbody/sitemaster')
+@section('cont')
+    @if( Auth::User()->tipoUsuario==2 or Auth::User()->tipoUsuario==3)  
+     <script type="text/javascript">
+         setTimeout("window.history.go(-1)",0); 
+     </script>
+    @endif
+    
+<div class="container-fluid"> 
+<div class="row">
 
-
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../css/administrador/css/stiloAdminTeacher.css">
-        <title>Profesor</title>
-        <link rel="stylesheet"  href="../css/font-awesome.css">
-        <link rel="stylesheet"  href="../css/font-awesome.min.css">
-    </head>
-    <body>
-
-        <header class="header">
-            <div class="logo">
-                <img src="../img/LogoUnivCostaRica.png" width="230" height="80" alt="Achatada" border="0">
-            </div>
-            <div class="titulo">
-                <h2>UNIVERSIDAD DE COSTA RICA</h2>
-                <p class="p1">Maestría de la Carrera Informática Empresarial</p>
-            </div>
-            <div class="fotolog">
-            @extends('homeLogout')
-            @section('contenido')
-            @endsection
-            </div>
-        </header>
-
-        <section class="section-body">
-            <div class="sec1">
-                <button onclick="HomeAdmi()"><span class="fa fa-home"></span></button>
-            </div>
-            <div class="sec2">
-<center><h4>UCR, Institución benemérita de la educación y la cultura costarricense....</h4></center>
+<div class="col-xs-12 col-sm-3 col-md-3">
+<div class="form-group">
+  <input value="1" style="visibility:hidden" id="id"> 
+</div>    
 </div>
-<div class="sec5"></div>
-<div class="sec6">            
-<center><p>Agregar docente</p></center>
-<div class="contenedor">
 
+<div class="col-xs-12 col-sm-5 col-md-5">
+@if($flash=session('message'))
+      <div class="alert alert-success">
+      <button class="close" data-dismiss="alert"><span>&times;</span></button>
+      <strong>!!!!</strong> {{$flash}}
+      </div>
+@endif
+<h2 style="color:gray; text-align: left;">Agregar docente</h2>
 <form role="form" method="post" action="/Users">
 {{csrf_field()}}
 <input name="tipoUsuario" value="2" style="visibility:hidden"><br>
-Nombre: <input type="text" name="name" size="30" maxlength="100" class="nombre" required autofocus>
+<div class="form-group">
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="name" class="form-control" required autofocus>  
+</div> 
+<div class="form-group">
+    <label for="carrera">Carrera:</label>
+    <input type="text" name="carrera" class="form-control" required autofocus>
+</div> 
+<div class="form-group">
+    <label for="sede">Sede:</label>
+    <input type="text" name="sede" class="form-control" required autofocus>
+</div> 
+<div class="form-group">
+    <label for="email">Email:</label>
+    <input id="email" type="email" name="email" value="@" class="form-control" required autofocus> 
+</div>
+<div class="form-group">
+    <label for="password">Contraseña:</label>
+    <input id="password" type="password" class="form-control" name="password" placeholder="contraseña nueva" required> 
+</div>
+<div class="form-group">
+    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="confirmar contraseña" required>
+</div>
+<input class="btn btn-primary" type="submit" value="Agregar">
 <br>
-Carrera: <input type="text" name="carrera" size="30" maxlength="100" class="carrera" required autofocus>
 <br>
-Sede: <input type="text" name="sede" size="30" maxlength="100" class="sede" required autofocus>
-<br>
-Email: <input id="email" type="email" name="email" size="30" maxlength="100" value="@" class="correo" required autofocus>
-<br>
-Contraseña: <input id="password" type="password" class="contraseña" name="password" size="30" maxlength="100" required>
-<br>
-<input id="password-confirm" type="password" class="contraseña2" name="password_confirmation" size="30" maxlength="100" required>
-<br>
-<input type="submit" value="Agregar" id="btn1">
-<br>
-<br>
-@if ($errors->has('email'))
-     <span class="help-block">
-     Correo ya está en uso!!!!
+<div class="form-group">
+@if ($errors->has('email')) 
+     <span class="text-danger">
+     Correo ya está en uso o está incorrecto!!!!
      </span>
 @endif
-<br>
+</div>
+<div class="form-group">
 @if ($errors->has('password'))
-<span class="help-block">
-Contraseñas no coinciden!!!!
-</span>
+     <span class="text-danger">
+     Contraseñas no coinciden o incorrecta(min 6 carácteres)!!!!
+     </span>
 @endif
+</div>
 </form>
 
+
 </div>
-</div>
-<div class="sec7">
-<style type="text/css">
-    ol{
-        margin:0px 0px; 
-    }
-    .help-block{
-        color: red;
-    }
-</style>
-<p>Lista de Profesores</p><br>
+
+<div class="col-xs-12 col-sm-4 col-md-4">
+
+<h2 style="color:gray; text-align: center;">Lista de docentes</h2>
+<div class="over">
+
 @foreach($Users as $User)  
 @if( '2' == $User->tipoUsuario)  
 <ol>   
-<li type="circle">{{$User->name}}</li>
+<li type="circle"><a class="btn-sm btn-primary glyphicon glyphicon-eye-open" style="text-decoration: none;" href="/{{$User->id}}/admiProfesor"> </a> <a class="btn-sm btn-danger glyphicon glyphicon-trash"  style="text-decoration: none;" href="/{{$User->id}}/destruir"></a> <strong class="text-primary">{{$User->name}}</strong></li>
 </ol>
 @endif
 @endforeach
 </div>
-</section>
 
-        <footer class="footer">
-            <div class="social">
-                <a href="a" class="item"> <span class="fa fa-facebook"></span></a>
-                <a href="a" class="item"> <span class="fa fa-twitter"></span></a>
-                <a href="a" class="item"> <span class="fa fa-instagram"></span></a>
-            </div>
-            <div class="content-links">
-                <nav class="menu">
-                    <ul>
-                        <li><a href="#">UCR</a></li>
-                        <li><a href="#">becas-ucr</a></li>
-                        <li><a href="#">e-matrícula</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </footer>
+</div>
 
-        <script src="../js/administrador/mainAdminTeacher.js"></script>
-    </body>
-</html>
+</div>
+</div>
+
+@endsection

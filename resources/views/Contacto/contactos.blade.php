@@ -11,7 +11,11 @@
         <link rel="stylesheet"  href="../css/font-awesome.min.css">
     </head>
     <body>
-
+    @if( Auth::User()->tipoUsuario==1 or Auth::User()->tipoUsuario==2)  
+     <script type="text/javascript">
+         setTimeout("window.history.go(-1)",0); 
+     </script>
+    @endif
         <header class="header">
             <div class="logo">
                 <img src="../img/LogoUnivCostaRica.png" width="230" height="80" alt="Achatada" border="0">
