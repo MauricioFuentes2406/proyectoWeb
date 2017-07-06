@@ -13,8 +13,7 @@
 |
 */
 Auth::routes();
-/*Route::resource('/dberfil', 'Controlador');
-*/
+
 Route::get('/', 'Controlador@index')->name('home');
 
 Route::get('/Estudiante/HomeEstudiante', 'Controlador@HomeEstudiante');

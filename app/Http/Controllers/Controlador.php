@@ -22,7 +22,6 @@ class Controlador extends Controller{
     }
 
     public function index(){
-
     if (Auth::user()->tipoUsuario=='1'){
     return $this->administrador(); 
     }
@@ -33,7 +32,7 @@ class Controlador extends Controller{
     return $this->HomeEstudiante(); 
     }
     }
-
+//ESTUDIANTES
     public function HomeEstudiante(){
     $Users = User::all();
     return view('/Estudiante/HomeEstudiante', compact('Users'));
@@ -42,7 +41,6 @@ class Controlador extends Controller{
     $Users = User::all();
 	return view('/Estudiante/adminEstudiante', compact('Users'));
     }
-
     public function editarEs($id){
     $User = User::find($id);
     return view('/Estudiante/editarEstudiante', compact('User'));
@@ -80,7 +78,7 @@ class Controlador extends Controller{
 
     return redirect('/Estudiante/adminEstudiante');
     }
-
+//PROFESORES
     public function datosAlumno($id){
     $User = User::find($id);
     $Users = User::all();
@@ -105,7 +103,6 @@ class Controlador extends Controller{
             'email' => 'required|string|email|max:255|unique:users'
         ]);
     }
-
     $User->name = request('name');
     $User->carrera = request('carrera');
     $User->sede = request('sede');
@@ -115,12 +112,11 @@ class Controlador extends Controller{
 
     return redirect('/Profesor/adminProfesor'); 
     }
-
     public function alumnos(){
     $Users = User::all();
     return view('Profesor/alumnos', compact('Users'));
     }
-
+//ADMINISTRADOR
     public function administrador(){
     $Users = User::all();
     return view('/Administrador/administrador', compact('Users'));
@@ -143,7 +139,6 @@ class Controlador extends Controller{
             'email' => 'required|string|email|max:255|unique:users'
         ]);
     }
-
     $User->name = request('name');
     $User->sede = request('sede');
     $User->email = request('email');
@@ -152,12 +147,10 @@ class Controlador extends Controller{
 
     return redirect('/Administrador/admin');
     }
-
     public function adminTeacher(){
     $Users = User::all();
     return view('/Administrador/adminTeacher', compact('Users'));
     }
-
     public function storeProfesor(Request $request){
 
         $this->validate($request,[
@@ -217,7 +210,7 @@ class Controlador extends Controller{
     $dbperfils = dbperfil::all();
     return view('/Archivos/file', compact('Users','dbperfils'));
     }
-
+//ARCHIVOS
     public function save(Request $request){
 
     $this->validate($request,[
